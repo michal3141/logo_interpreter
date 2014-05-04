@@ -1,0 +1,2086 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> instr_list
+Rule 2     program -> func_list
+Rule 3     program -> func_list instr_list
+Rule 4     func_list -> func
+Rule 5     func_list -> func_list func
+Rule 6     instr_list -> instr
+Rule 7     instr_list -> instr_list instr
+Rule 8     func -> TO WORD ( params ) extended_instr_list END
+Rule 9     params -> <empty>
+Rule 10    params -> ref
+Rule 11    params -> params ref
+Rule 12    extended_instr_list -> instr
+Rule 13    extended_instr_list -> func
+Rule 14    extended_instr_list -> extended_instr_list instr
+Rule 15    extended_instr_list -> extended_instr_list func
+Rule 16    ref -> : WORD
+Rule 17    instr -> MAKE quoted expr
+Rule 18    instr -> REPEAT expr [ instr_list ]
+Rule 19    instr -> FOR [ WORD expr expr expr ] [ instr_list ]
+Rule 20    instr -> FOR [ WORD expr expr ] [ instr_list ]
+Rule 21    instr -> IFELSE condition [ instr_list ] [ instr_list ]
+Rule 22    instr -> WORD ( expr_list )
+Rule 23    expr_list -> <empty>
+Rule 24    expr_list -> expr
+Rule 25    expr_list -> expr_list , expr
+Rule 26    expr -> const
+Rule 27    expr -> name
+Rule 28    expr -> ref
+Rule 29    expr -> WORD ( expr_list )
+Rule 30    expr -> expr + expr
+Rule 31    expr -> expr - expr
+Rule 32    expr -> expr * expr
+Rule 33    expr -> expr / expr
+Rule 34    expr -> ( expr )
+Rule 35    condition -> expr = expr
+Rule 36    condition -> expr < expr
+Rule 37    condition -> expr > expr
+Rule 38    condition -> expr NEQ expr
+Rule 39    condition -> expr GE expr
+Rule 40    condition -> expr LE expr
+Rule 41    quoted -> " WORD
+Rule 42    name -> WORD
+Rule 43    const -> FLOAT
+Rule 44    const -> INTEGER
+
+Terminals, with rules where they appear
+
+"                    : 41
+(                    : 8 22 29 34
+)                    : 8 22 29 34
+*                    : 32
++                    : 30
+,                    : 25
+-                    : 31
+/                    : 33
+:                    : 16
+<                    : 36
+=                    : 35
+>                    : 37
+END                  : 8
+FLOAT                : 43
+FOR                  : 19 20
+GE                   : 39
+IFELSE               : 21
+INTEGER              : 44
+LE                   : 40
+MAKE                 : 17
+NEQ                  : 38
+REPEAT               : 18
+TO                   : 8
+WORD                 : 8 16 19 20 22 29 41 42
+[                    : 18 19 19 20 20 21 21
+]                    : 18 19 19 20 20 21 21
+error                : 
+
+Nonterminals, with rules where they appear
+
+condition            : 21
+const                : 26
+expr                 : 17 18 19 19 19 20 20 24 25 30 30 31 31 32 32 33 33 34 35 35 36 36 37 37 38 38 39 39 40 40
+expr_list            : 22 25 29
+extended_instr_list  : 8 14 15
+func                 : 4 5 13 15
+func_list            : 2 3 5
+instr                : 6 7 12 14
+instr_list           : 1 3 7 18 19 20 21 21
+name                 : 27
+params               : 8 11
+program              : 0
+quoted               : 17
+ref                  : 10 11 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . instr_list
+    (2) program -> . func_list
+    (3) program -> . func_list instr_list
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (4) func_list -> . func
+    (5) func_list -> . func_list func
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+    (8) func -> . TO WORD ( params ) extended_instr_list END
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+    TO              shift and go to state 4
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 2
+    program                        shift and go to state 5
+    func                           shift and go to state 9
+    func_list                      shift and go to state 10
+
+state 1
+
+    (6) instr_list -> instr .
+
+    ]               reduce using rule 6 (instr_list -> instr .)
+    MAKE            reduce using rule 6 (instr_list -> instr .)
+    REPEAT          reduce using rule 6 (instr_list -> instr .)
+    FOR             reduce using rule 6 (instr_list -> instr .)
+    IFELSE          reduce using rule 6 (instr_list -> instr .)
+    WORD            reduce using rule 6 (instr_list -> instr .)
+    $end            reduce using rule 6 (instr_list -> instr .)
+
+
+state 2
+
+    (1) program -> instr_list .
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    $end            reduce using rule 1 (program -> instr_list .)
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 3
+
+    (22) instr -> WORD . ( expr_list )
+
+    (               shift and go to state 13
+
+
+state 4
+
+    (8) func -> TO . WORD ( params ) extended_instr_list END
+
+    WORD            shift and go to state 14
+
+
+state 5
+
+    (0) S' -> program .
+
+
+
+state 6
+
+    (21) instr -> IFELSE . condition [ instr_list ] [ instr_list ]
+    (35) condition -> . expr = expr
+    (36) condition -> . expr < expr
+    (37) condition -> . expr > expr
+    (38) condition -> . expr NEQ expr
+    (39) condition -> . expr GE expr
+    (40) condition -> . expr LE expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 24
+    ref                            shift and go to state 20
+    condition                      shift and go to state 22
+
+state 7
+
+    (18) instr -> REPEAT . expr [ instr_list ]
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 25
+    ref                            shift and go to state 20
+
+state 8
+
+    (19) instr -> FOR . [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> FOR . [ WORD expr expr ] [ instr_list ]
+
+    [               shift and go to state 26
+
+
+state 9
+
+    (4) func_list -> func .
+
+    TO              reduce using rule 4 (func_list -> func .)
+    MAKE            reduce using rule 4 (func_list -> func .)
+    REPEAT          reduce using rule 4 (func_list -> func .)
+    FOR             reduce using rule 4 (func_list -> func .)
+    IFELSE          reduce using rule 4 (func_list -> func .)
+    WORD            reduce using rule 4 (func_list -> func .)
+    $end            reduce using rule 4 (func_list -> func .)
+
+
+state 10
+
+    (2) program -> func_list .
+    (3) program -> func_list . instr_list
+    (5) func_list -> func_list . func
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (8) func -> . TO WORD ( params ) extended_instr_list END
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    $end            reduce using rule 2 (program -> func_list .)
+    TO              shift and go to state 4
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 27
+    func                           shift and go to state 28
+
+state 11
+
+    (17) instr -> MAKE . quoted expr
+    (41) quoted -> . " WORD
+
+    "               shift and go to state 29
+
+    quoted                         shift and go to state 30
+
+state 12
+
+    (7) instr_list -> instr_list instr .
+
+    ]               reduce using rule 7 (instr_list -> instr_list instr .)
+    MAKE            reduce using rule 7 (instr_list -> instr_list instr .)
+    REPEAT          reduce using rule 7 (instr_list -> instr_list instr .)
+    FOR             reduce using rule 7 (instr_list -> instr_list instr .)
+    IFELSE          reduce using rule 7 (instr_list -> instr_list instr .)
+    WORD            reduce using rule 7 (instr_list -> instr_list instr .)
+    $end            reduce using rule 7 (instr_list -> instr_list instr .)
+
+
+state 13
+
+    (22) instr -> WORD ( . expr_list )
+    (23) expr_list -> .
+    (24) expr_list -> . expr
+    (25) expr_list -> . expr_list , expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    )               reduce using rule 23 (expr_list -> .)
+    ,               reduce using rule 23 (expr_list -> .)
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr_list                      shift and go to state 32
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 31
+
+state 14
+
+    (8) func -> TO WORD . ( params ) extended_instr_list END
+
+    (               shift and go to state 33
+
+
+state 15
+
+    (43) const -> FLOAT .
+
+    +               reduce using rule 43 (const -> FLOAT .)
+    -               reduce using rule 43 (const -> FLOAT .)
+    *               reduce using rule 43 (const -> FLOAT .)
+    /               reduce using rule 43 (const -> FLOAT .)
+    =               reduce using rule 43 (const -> FLOAT .)
+    <               reduce using rule 43 (const -> FLOAT .)
+    >               reduce using rule 43 (const -> FLOAT .)
+    NEQ             reduce using rule 43 (const -> FLOAT .)
+    GE              reduce using rule 43 (const -> FLOAT .)
+    LE              reduce using rule 43 (const -> FLOAT .)
+    [               reduce using rule 43 (const -> FLOAT .)
+    )               reduce using rule 43 (const -> FLOAT .)
+    ,               reduce using rule 43 (const -> FLOAT .)
+    MAKE            reduce using rule 43 (const -> FLOAT .)
+    REPEAT          reduce using rule 43 (const -> FLOAT .)
+    FOR             reduce using rule 43 (const -> FLOAT .)
+    IFELSE          reduce using rule 43 (const -> FLOAT .)
+    WORD            reduce using rule 43 (const -> FLOAT .)
+    $end            reduce using rule 43 (const -> FLOAT .)
+    ]               reduce using rule 43 (const -> FLOAT .)
+    END             reduce using rule 43 (const -> FLOAT .)
+    TO              reduce using rule 43 (const -> FLOAT .)
+    (               reduce using rule 43 (const -> FLOAT .)
+    FLOAT           reduce using rule 43 (const -> FLOAT .)
+    INTEGER         reduce using rule 43 (const -> FLOAT .)
+    :               reduce using rule 43 (const -> FLOAT .)
+
+
+state 16
+
+    (26) expr -> const .
+
+    )               reduce using rule 26 (expr -> const .)
+    +               reduce using rule 26 (expr -> const .)
+    -               reduce using rule 26 (expr -> const .)
+    *               reduce using rule 26 (expr -> const .)
+    /               reduce using rule 26 (expr -> const .)
+    [               reduce using rule 26 (expr -> const .)
+    =               reduce using rule 26 (expr -> const .)
+    <               reduce using rule 26 (expr -> const .)
+    >               reduce using rule 26 (expr -> const .)
+    NEQ             reduce using rule 26 (expr -> const .)
+    GE              reduce using rule 26 (expr -> const .)
+    LE              reduce using rule 26 (expr -> const .)
+    ,               reduce using rule 26 (expr -> const .)
+    MAKE            reduce using rule 26 (expr -> const .)
+    REPEAT          reduce using rule 26 (expr -> const .)
+    FOR             reduce using rule 26 (expr -> const .)
+    IFELSE          reduce using rule 26 (expr -> const .)
+    WORD            reduce using rule 26 (expr -> const .)
+    $end            reduce using rule 26 (expr -> const .)
+    ]               reduce using rule 26 (expr -> const .)
+    END             reduce using rule 26 (expr -> const .)
+    TO              reduce using rule 26 (expr -> const .)
+    (               reduce using rule 26 (expr -> const .)
+    FLOAT           reduce using rule 26 (expr -> const .)
+    INTEGER         reduce using rule 26 (expr -> const .)
+    :               reduce using rule 26 (expr -> const .)
+
+
+state 17
+
+    (34) expr -> ( . expr )
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 34
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 18
+
+    (44) const -> INTEGER .
+
+    +               reduce using rule 44 (const -> INTEGER .)
+    -               reduce using rule 44 (const -> INTEGER .)
+    *               reduce using rule 44 (const -> INTEGER .)
+    /               reduce using rule 44 (const -> INTEGER .)
+    =               reduce using rule 44 (const -> INTEGER .)
+    <               reduce using rule 44 (const -> INTEGER .)
+    >               reduce using rule 44 (const -> INTEGER .)
+    NEQ             reduce using rule 44 (const -> INTEGER .)
+    GE              reduce using rule 44 (const -> INTEGER .)
+    LE              reduce using rule 44 (const -> INTEGER .)
+    [               reduce using rule 44 (const -> INTEGER .)
+    )               reduce using rule 44 (const -> INTEGER .)
+    ,               reduce using rule 44 (const -> INTEGER .)
+    MAKE            reduce using rule 44 (const -> INTEGER .)
+    REPEAT          reduce using rule 44 (const -> INTEGER .)
+    FOR             reduce using rule 44 (const -> INTEGER .)
+    IFELSE          reduce using rule 44 (const -> INTEGER .)
+    WORD            reduce using rule 44 (const -> INTEGER .)
+    $end            reduce using rule 44 (const -> INTEGER .)
+    ]               reduce using rule 44 (const -> INTEGER .)
+    END             reduce using rule 44 (const -> INTEGER .)
+    TO              reduce using rule 44 (const -> INTEGER .)
+    (               reduce using rule 44 (const -> INTEGER .)
+    FLOAT           reduce using rule 44 (const -> INTEGER .)
+    INTEGER         reduce using rule 44 (const -> INTEGER .)
+    :               reduce using rule 44 (const -> INTEGER .)
+
+
+state 19
+
+    (16) ref -> : . WORD
+
+    WORD            shift and go to state 35
+
+
+state 20
+
+    (28) expr -> ref .
+
+    )               reduce using rule 28 (expr -> ref .)
+    +               reduce using rule 28 (expr -> ref .)
+    -               reduce using rule 28 (expr -> ref .)
+    *               reduce using rule 28 (expr -> ref .)
+    /               reduce using rule 28 (expr -> ref .)
+    [               reduce using rule 28 (expr -> ref .)
+    =               reduce using rule 28 (expr -> ref .)
+    <               reduce using rule 28 (expr -> ref .)
+    >               reduce using rule 28 (expr -> ref .)
+    NEQ             reduce using rule 28 (expr -> ref .)
+    GE              reduce using rule 28 (expr -> ref .)
+    LE              reduce using rule 28 (expr -> ref .)
+    ,               reduce using rule 28 (expr -> ref .)
+    MAKE            reduce using rule 28 (expr -> ref .)
+    REPEAT          reduce using rule 28 (expr -> ref .)
+    FOR             reduce using rule 28 (expr -> ref .)
+    IFELSE          reduce using rule 28 (expr -> ref .)
+    WORD            reduce using rule 28 (expr -> ref .)
+    $end            reduce using rule 28 (expr -> ref .)
+    ]               reduce using rule 28 (expr -> ref .)
+    END             reduce using rule 28 (expr -> ref .)
+    TO              reduce using rule 28 (expr -> ref .)
+    (               reduce using rule 28 (expr -> ref .)
+    FLOAT           reduce using rule 28 (expr -> ref .)
+    INTEGER         reduce using rule 28 (expr -> ref .)
+    :               reduce using rule 28 (expr -> ref .)
+
+
+state 21
+
+    (29) expr -> WORD . ( expr_list )
+    (42) name -> WORD .
+
+  ! shift/reduce conflict for ( resolved as shift
+    (               shift and go to state 36
+    ]               reduce using rule 42 (name -> WORD .)
+    +               reduce using rule 42 (name -> WORD .)
+    -               reduce using rule 42 (name -> WORD .)
+    *               reduce using rule 42 (name -> WORD .)
+    /               reduce using rule 42 (name -> WORD .)
+    =               reduce using rule 42 (name -> WORD .)
+    <               reduce using rule 42 (name -> WORD .)
+    >               reduce using rule 42 (name -> WORD .)
+    NEQ             reduce using rule 42 (name -> WORD .)
+    GE              reduce using rule 42 (name -> WORD .)
+    LE              reduce using rule 42 (name -> WORD .)
+    [               reduce using rule 42 (name -> WORD .)
+    )               reduce using rule 42 (name -> WORD .)
+    ,               reduce using rule 42 (name -> WORD .)
+    MAKE            reduce using rule 42 (name -> WORD .)
+    REPEAT          reduce using rule 42 (name -> WORD .)
+    FOR             reduce using rule 42 (name -> WORD .)
+    IFELSE          reduce using rule 42 (name -> WORD .)
+    WORD            reduce using rule 42 (name -> WORD .)
+    $end            reduce using rule 42 (name -> WORD .)
+    END             reduce using rule 42 (name -> WORD .)
+    TO              reduce using rule 42 (name -> WORD .)
+    FLOAT           reduce using rule 42 (name -> WORD .)
+    INTEGER         reduce using rule 42 (name -> WORD .)
+    :               reduce using rule 42 (name -> WORD .)
+
+  ! (               [ reduce using rule 42 (name -> WORD .) ]
+
+
+state 22
+
+    (21) instr -> IFELSE condition . [ instr_list ] [ instr_list ]
+
+    [               shift and go to state 37
+
+
+state 23
+
+    (27) expr -> name .
+
+    )               reduce using rule 27 (expr -> name .)
+    +               reduce using rule 27 (expr -> name .)
+    -               reduce using rule 27 (expr -> name .)
+    *               reduce using rule 27 (expr -> name .)
+    /               reduce using rule 27 (expr -> name .)
+    [               reduce using rule 27 (expr -> name .)
+    =               reduce using rule 27 (expr -> name .)
+    <               reduce using rule 27 (expr -> name .)
+    >               reduce using rule 27 (expr -> name .)
+    NEQ             reduce using rule 27 (expr -> name .)
+    GE              reduce using rule 27 (expr -> name .)
+    LE              reduce using rule 27 (expr -> name .)
+    ,               reduce using rule 27 (expr -> name .)
+    MAKE            reduce using rule 27 (expr -> name .)
+    REPEAT          reduce using rule 27 (expr -> name .)
+    FOR             reduce using rule 27 (expr -> name .)
+    IFELSE          reduce using rule 27 (expr -> name .)
+    WORD            reduce using rule 27 (expr -> name .)
+    $end            reduce using rule 27 (expr -> name .)
+    ]               reduce using rule 27 (expr -> name .)
+    END             reduce using rule 27 (expr -> name .)
+    TO              reduce using rule 27 (expr -> name .)
+    (               reduce using rule 27 (expr -> name .)
+    FLOAT           reduce using rule 27 (expr -> name .)
+    INTEGER         reduce using rule 27 (expr -> name .)
+    :               reduce using rule 27 (expr -> name .)
+
+
+state 24
+
+    (35) condition -> expr . = expr
+    (36) condition -> expr . < expr
+    (37) condition -> expr . > expr
+    (38) condition -> expr . NEQ expr
+    (39) condition -> expr . GE expr
+    (40) condition -> expr . LE expr
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    =               shift and go to state 45
+    <               shift and go to state 46
+    >               shift and go to state 44
+    NEQ             shift and go to state 47
+    GE              shift and go to state 43
+    LE              shift and go to state 38
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 25
+
+    (18) instr -> REPEAT expr . [ instr_list ]
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               shift and go to state 48
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 26
+
+    (19) instr -> FOR [ . WORD expr expr expr ] [ instr_list ]
+    (20) instr -> FOR [ . WORD expr expr ] [ instr_list ]
+
+    WORD            shift and go to state 49
+
+
+state 27
+
+    (3) program -> func_list instr_list .
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    $end            reduce using rule 3 (program -> func_list instr_list .)
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 28
+
+    (5) func_list -> func_list func .
+
+    TO              reduce using rule 5 (func_list -> func_list func .)
+    MAKE            reduce using rule 5 (func_list -> func_list func .)
+    REPEAT          reduce using rule 5 (func_list -> func_list func .)
+    FOR             reduce using rule 5 (func_list -> func_list func .)
+    IFELSE          reduce using rule 5 (func_list -> func_list func .)
+    WORD            reduce using rule 5 (func_list -> func_list func .)
+    $end            reduce using rule 5 (func_list -> func_list func .)
+
+
+state 29
+
+    (41) quoted -> " . WORD
+
+    WORD            shift and go to state 50
+
+
+state 30
+
+    (17) instr -> MAKE quoted . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 51
+    ref                            shift and go to state 20
+
+state 31
+
+    (24) expr_list -> expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 24 (expr_list -> expr .)
+    ,               reduce using rule 24 (expr_list -> expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 32
+
+    (22) instr -> WORD ( expr_list . )
+    (25) expr_list -> expr_list . , expr
+
+    )               shift and go to state 52
+    ,               shift and go to state 53
+
+
+state 33
+
+    (8) func -> TO WORD ( . params ) extended_instr_list END
+    (9) params -> .
+    (10) params -> . ref
+    (11) params -> . params ref
+    (16) ref -> . : WORD
+
+  ! shift/reduce conflict for : resolved as shift
+    )               reduce using rule 9 (params -> .)
+    :               shift and go to state 19
+
+  ! :               [ reduce using rule 9 (params -> .) ]
+
+    ref                            shift and go to state 55
+    params                         shift and go to state 54
+
+state 34
+
+    (34) expr -> ( expr . )
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               shift and go to state 56
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 35
+
+    (16) ref -> : WORD .
+
+    +               reduce using rule 16 (ref -> : WORD .)
+    -               reduce using rule 16 (ref -> : WORD .)
+    *               reduce using rule 16 (ref -> : WORD .)
+    /               reduce using rule 16 (ref -> : WORD .)
+    )               reduce using rule 16 (ref -> : WORD .)
+    ,               reduce using rule 16 (ref -> : WORD .)
+    [               reduce using rule 16 (ref -> : WORD .)
+    :               reduce using rule 16 (ref -> : WORD .)
+    WORD            reduce using rule 16 (ref -> : WORD .)
+    (               reduce using rule 16 (ref -> : WORD .)
+    FLOAT           reduce using rule 16 (ref -> : WORD .)
+    INTEGER         reduce using rule 16 (ref -> : WORD .)
+    =               reduce using rule 16 (ref -> : WORD .)
+    <               reduce using rule 16 (ref -> : WORD .)
+    >               reduce using rule 16 (ref -> : WORD .)
+    NEQ             reduce using rule 16 (ref -> : WORD .)
+    GE              reduce using rule 16 (ref -> : WORD .)
+    LE              reduce using rule 16 (ref -> : WORD .)
+    MAKE            reduce using rule 16 (ref -> : WORD .)
+    REPEAT          reduce using rule 16 (ref -> : WORD .)
+    FOR             reduce using rule 16 (ref -> : WORD .)
+    IFELSE          reduce using rule 16 (ref -> : WORD .)
+    $end            reduce using rule 16 (ref -> : WORD .)
+    ]               reduce using rule 16 (ref -> : WORD .)
+    END             reduce using rule 16 (ref -> : WORD .)
+    TO              reduce using rule 16 (ref -> : WORD .)
+
+
+state 36
+
+    (29) expr -> WORD ( . expr_list )
+    (23) expr_list -> .
+    (24) expr_list -> . expr
+    (25) expr_list -> . expr_list , expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    )               reduce using rule 23 (expr_list -> .)
+    ,               reduce using rule 23 (expr_list -> .)
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr_list                      shift and go to state 57
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 31
+
+state 37
+
+    (21) instr -> IFELSE condition [ . instr_list ] [ instr_list ]
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 58
+
+state 38
+
+    (40) condition -> expr LE . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 59
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 39
+
+    (30) expr -> expr + . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 60
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 40
+
+    (32) expr -> expr * . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 61
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 41
+
+    (31) expr -> expr - . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 62
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 42
+
+    (33) expr -> expr / . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 63
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 43
+
+    (39) condition -> expr GE . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 64
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 44
+
+    (37) condition -> expr > . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 65
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 45
+
+    (35) condition -> expr = . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 66
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 46
+
+    (36) condition -> expr < . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 67
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 47
+
+    (38) condition -> expr NEQ . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    expr                           shift and go to state 68
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+
+state 48
+
+    (18) instr -> REPEAT expr [ . instr_list ]
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 69
+
+state 49
+
+    (19) instr -> FOR [ WORD . expr expr expr ] [ instr_list ]
+    (20) instr -> FOR [ WORD . expr expr ] [ instr_list ]
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 70
+    ref                            shift and go to state 20
+
+state 50
+
+    (41) quoted -> " WORD .
+
+    WORD            reduce using rule 41 (quoted -> " WORD .)
+    (               reduce using rule 41 (quoted -> " WORD .)
+    FLOAT           reduce using rule 41 (quoted -> " WORD .)
+    INTEGER         reduce using rule 41 (quoted -> " WORD .)
+    :               reduce using rule 41 (quoted -> " WORD .)
+
+
+state 51
+
+    (17) instr -> MAKE quoted expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    ]               reduce using rule 17 (instr -> MAKE quoted expr .)
+    MAKE            reduce using rule 17 (instr -> MAKE quoted expr .)
+    REPEAT          reduce using rule 17 (instr -> MAKE quoted expr .)
+    FOR             reduce using rule 17 (instr -> MAKE quoted expr .)
+    IFELSE          reduce using rule 17 (instr -> MAKE quoted expr .)
+    WORD            reduce using rule 17 (instr -> MAKE quoted expr .)
+    END             reduce using rule 17 (instr -> MAKE quoted expr .)
+    TO              reduce using rule 17 (instr -> MAKE quoted expr .)
+    $end            reduce using rule 17 (instr -> MAKE quoted expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 52
+
+    (22) instr -> WORD ( expr_list ) .
+
+    ]               reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    MAKE            reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    REPEAT          reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    FOR             reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    IFELSE          reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    WORD            reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    END             reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    TO              reduce using rule 22 (instr -> WORD ( expr_list ) .)
+    $end            reduce using rule 22 (instr -> WORD ( expr_list ) .)
+
+
+state 53
+
+    (25) expr_list -> expr_list , . expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    ref                            shift and go to state 20
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 71
+
+state 54
+
+    (8) func -> TO WORD ( params . ) extended_instr_list END
+    (11) params -> params . ref
+    (16) ref -> . : WORD
+
+    )               shift and go to state 72
+    :               shift and go to state 19
+
+    ref                            shift and go to state 73
+
+state 55
+
+    (10) params -> ref .
+
+    )               reduce using rule 10 (params -> ref .)
+    :               reduce using rule 10 (params -> ref .)
+
+
+state 56
+
+    (34) expr -> ( expr ) .
+
+    )               reduce using rule 34 (expr -> ( expr ) .)
+    +               reduce using rule 34 (expr -> ( expr ) .)
+    -               reduce using rule 34 (expr -> ( expr ) .)
+    *               reduce using rule 34 (expr -> ( expr ) .)
+    /               reduce using rule 34 (expr -> ( expr ) .)
+    [               reduce using rule 34 (expr -> ( expr ) .)
+    =               reduce using rule 34 (expr -> ( expr ) .)
+    <               reduce using rule 34 (expr -> ( expr ) .)
+    >               reduce using rule 34 (expr -> ( expr ) .)
+    NEQ             reduce using rule 34 (expr -> ( expr ) .)
+    GE              reduce using rule 34 (expr -> ( expr ) .)
+    LE              reduce using rule 34 (expr -> ( expr ) .)
+    ,               reduce using rule 34 (expr -> ( expr ) .)
+    MAKE            reduce using rule 34 (expr -> ( expr ) .)
+    REPEAT          reduce using rule 34 (expr -> ( expr ) .)
+    FOR             reduce using rule 34 (expr -> ( expr ) .)
+    IFELSE          reduce using rule 34 (expr -> ( expr ) .)
+    WORD            reduce using rule 34 (expr -> ( expr ) .)
+    $end            reduce using rule 34 (expr -> ( expr ) .)
+    ]               reduce using rule 34 (expr -> ( expr ) .)
+    END             reduce using rule 34 (expr -> ( expr ) .)
+    TO              reduce using rule 34 (expr -> ( expr ) .)
+    (               reduce using rule 34 (expr -> ( expr ) .)
+    FLOAT           reduce using rule 34 (expr -> ( expr ) .)
+    INTEGER         reduce using rule 34 (expr -> ( expr ) .)
+    :               reduce using rule 34 (expr -> ( expr ) .)
+
+
+state 57
+
+    (29) expr -> WORD ( expr_list . )
+    (25) expr_list -> expr_list . , expr
+
+    )               shift and go to state 74
+    ,               shift and go to state 53
+
+
+state 58
+
+    (21) instr -> IFELSE condition [ instr_list . ] [ instr_list ]
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    ]               shift and go to state 75
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 59
+
+    (40) condition -> expr LE expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 40 (condition -> expr LE expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 60
+
+    (30) expr -> expr + expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 30 (expr -> expr + expr .)
+    +               reduce using rule 30 (expr -> expr + expr .)
+    -               reduce using rule 30 (expr -> expr + expr .)
+    [               reduce using rule 30 (expr -> expr + expr .)
+    =               reduce using rule 30 (expr -> expr + expr .)
+    <               reduce using rule 30 (expr -> expr + expr .)
+    >               reduce using rule 30 (expr -> expr + expr .)
+    NEQ             reduce using rule 30 (expr -> expr + expr .)
+    GE              reduce using rule 30 (expr -> expr + expr .)
+    LE              reduce using rule 30 (expr -> expr + expr .)
+    ,               reduce using rule 30 (expr -> expr + expr .)
+    MAKE            reduce using rule 30 (expr -> expr + expr .)
+    REPEAT          reduce using rule 30 (expr -> expr + expr .)
+    FOR             reduce using rule 30 (expr -> expr + expr .)
+    IFELSE          reduce using rule 30 (expr -> expr + expr .)
+    WORD            reduce using rule 30 (expr -> expr + expr .)
+    $end            reduce using rule 30 (expr -> expr + expr .)
+    ]               reduce using rule 30 (expr -> expr + expr .)
+    END             reduce using rule 30 (expr -> expr + expr .)
+    TO              reduce using rule 30 (expr -> expr + expr .)
+    (               reduce using rule 30 (expr -> expr + expr .)
+    FLOAT           reduce using rule 30 (expr -> expr + expr .)
+    INTEGER         reduce using rule 30 (expr -> expr + expr .)
+    :               reduce using rule 30 (expr -> expr + expr .)
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+  ! *               [ reduce using rule 30 (expr -> expr + expr .) ]
+  ! /               [ reduce using rule 30 (expr -> expr + expr .) ]
+  ! +               [ shift and go to state 39 ]
+  ! -               [ shift and go to state 41 ]
+
+
+state 61
+
+    (32) expr -> expr * expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 32 (expr -> expr * expr .)
+    +               reduce using rule 32 (expr -> expr * expr .)
+    -               reduce using rule 32 (expr -> expr * expr .)
+    *               reduce using rule 32 (expr -> expr * expr .)
+    /               reduce using rule 32 (expr -> expr * expr .)
+    [               reduce using rule 32 (expr -> expr * expr .)
+    =               reduce using rule 32 (expr -> expr * expr .)
+    <               reduce using rule 32 (expr -> expr * expr .)
+    >               reduce using rule 32 (expr -> expr * expr .)
+    NEQ             reduce using rule 32 (expr -> expr * expr .)
+    GE              reduce using rule 32 (expr -> expr * expr .)
+    LE              reduce using rule 32 (expr -> expr * expr .)
+    ,               reduce using rule 32 (expr -> expr * expr .)
+    MAKE            reduce using rule 32 (expr -> expr * expr .)
+    REPEAT          reduce using rule 32 (expr -> expr * expr .)
+    FOR             reduce using rule 32 (expr -> expr * expr .)
+    IFELSE          reduce using rule 32 (expr -> expr * expr .)
+    WORD            reduce using rule 32 (expr -> expr * expr .)
+    $end            reduce using rule 32 (expr -> expr * expr .)
+    ]               reduce using rule 32 (expr -> expr * expr .)
+    END             reduce using rule 32 (expr -> expr * expr .)
+    TO              reduce using rule 32 (expr -> expr * expr .)
+    (               reduce using rule 32 (expr -> expr * expr .)
+    FLOAT           reduce using rule 32 (expr -> expr * expr .)
+    INTEGER         reduce using rule 32 (expr -> expr * expr .)
+    :               reduce using rule 32 (expr -> expr * expr .)
+
+  ! +               [ shift and go to state 39 ]
+  ! -               [ shift and go to state 41 ]
+  ! *               [ shift and go to state 40 ]
+  ! /               [ shift and go to state 42 ]
+
+
+state 62
+
+    (31) expr -> expr - expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 31 (expr -> expr - expr .)
+    +               reduce using rule 31 (expr -> expr - expr .)
+    -               reduce using rule 31 (expr -> expr - expr .)
+    [               reduce using rule 31 (expr -> expr - expr .)
+    =               reduce using rule 31 (expr -> expr - expr .)
+    <               reduce using rule 31 (expr -> expr - expr .)
+    >               reduce using rule 31 (expr -> expr - expr .)
+    NEQ             reduce using rule 31 (expr -> expr - expr .)
+    GE              reduce using rule 31 (expr -> expr - expr .)
+    LE              reduce using rule 31 (expr -> expr - expr .)
+    ,               reduce using rule 31 (expr -> expr - expr .)
+    MAKE            reduce using rule 31 (expr -> expr - expr .)
+    REPEAT          reduce using rule 31 (expr -> expr - expr .)
+    FOR             reduce using rule 31 (expr -> expr - expr .)
+    IFELSE          reduce using rule 31 (expr -> expr - expr .)
+    WORD            reduce using rule 31 (expr -> expr - expr .)
+    $end            reduce using rule 31 (expr -> expr - expr .)
+    ]               reduce using rule 31 (expr -> expr - expr .)
+    END             reduce using rule 31 (expr -> expr - expr .)
+    TO              reduce using rule 31 (expr -> expr - expr .)
+    (               reduce using rule 31 (expr -> expr - expr .)
+    FLOAT           reduce using rule 31 (expr -> expr - expr .)
+    INTEGER         reduce using rule 31 (expr -> expr - expr .)
+    :               reduce using rule 31 (expr -> expr - expr .)
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+  ! *               [ reduce using rule 31 (expr -> expr - expr .) ]
+  ! /               [ reduce using rule 31 (expr -> expr - expr .) ]
+  ! +               [ shift and go to state 39 ]
+  ! -               [ shift and go to state 41 ]
+
+
+state 63
+
+    (33) expr -> expr / expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 33 (expr -> expr / expr .)
+    +               reduce using rule 33 (expr -> expr / expr .)
+    -               reduce using rule 33 (expr -> expr / expr .)
+    *               reduce using rule 33 (expr -> expr / expr .)
+    /               reduce using rule 33 (expr -> expr / expr .)
+    [               reduce using rule 33 (expr -> expr / expr .)
+    =               reduce using rule 33 (expr -> expr / expr .)
+    <               reduce using rule 33 (expr -> expr / expr .)
+    >               reduce using rule 33 (expr -> expr / expr .)
+    NEQ             reduce using rule 33 (expr -> expr / expr .)
+    GE              reduce using rule 33 (expr -> expr / expr .)
+    LE              reduce using rule 33 (expr -> expr / expr .)
+    ,               reduce using rule 33 (expr -> expr / expr .)
+    MAKE            reduce using rule 33 (expr -> expr / expr .)
+    REPEAT          reduce using rule 33 (expr -> expr / expr .)
+    FOR             reduce using rule 33 (expr -> expr / expr .)
+    IFELSE          reduce using rule 33 (expr -> expr / expr .)
+    WORD            reduce using rule 33 (expr -> expr / expr .)
+    $end            reduce using rule 33 (expr -> expr / expr .)
+    ]               reduce using rule 33 (expr -> expr / expr .)
+    END             reduce using rule 33 (expr -> expr / expr .)
+    TO              reduce using rule 33 (expr -> expr / expr .)
+    (               reduce using rule 33 (expr -> expr / expr .)
+    FLOAT           reduce using rule 33 (expr -> expr / expr .)
+    INTEGER         reduce using rule 33 (expr -> expr / expr .)
+    :               reduce using rule 33 (expr -> expr / expr .)
+
+  ! +               [ shift and go to state 39 ]
+  ! -               [ shift and go to state 41 ]
+  ! *               [ shift and go to state 40 ]
+  ! /               [ shift and go to state 42 ]
+
+
+state 64
+
+    (39) condition -> expr GE expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 39 (condition -> expr GE expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 65
+
+    (37) condition -> expr > expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 37 (condition -> expr > expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 66
+
+    (35) condition -> expr = expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 35 (condition -> expr = expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 67
+
+    (36) condition -> expr < expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 36 (condition -> expr < expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 68
+
+    (38) condition -> expr NEQ expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    [               reduce using rule 38 (condition -> expr NEQ expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 69
+
+    (18) instr -> REPEAT expr [ instr_list . ]
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    ]               shift and go to state 76
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 70
+
+    (19) instr -> FOR [ WORD expr . expr expr ] [ instr_list ]
+    (20) instr -> FOR [ WORD expr . expr ] [ instr_list ]
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 77
+    ref                            shift and go to state 20
+
+state 71
+
+    (25) expr_list -> expr_list , expr .
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    )               reduce using rule 25 (expr_list -> expr_list , expr .)
+    ,               reduce using rule 25 (expr_list -> expr_list , expr .)
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 72
+
+    (8) func -> TO WORD ( params ) . extended_instr_list END
+    (12) extended_instr_list -> . instr
+    (13) extended_instr_list -> . func
+    (14) extended_instr_list -> . extended_instr_list instr
+    (15) extended_instr_list -> . extended_instr_list func
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+    (8) func -> . TO WORD ( params ) extended_instr_list END
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+    TO              shift and go to state 4
+
+    extended_instr_list            shift and go to state 78
+    instr                          shift and go to state 79
+    func                           shift and go to state 80
+
+state 73
+
+    (11) params -> params ref .
+
+    )               reduce using rule 11 (params -> params ref .)
+    :               reduce using rule 11 (params -> params ref .)
+
+
+state 74
+
+    (29) expr -> WORD ( expr_list ) .
+
+    )               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    +               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    -               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    *               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    /               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    [               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    =               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    <               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    >               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    NEQ             reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    GE              reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    LE              reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    ,               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    MAKE            reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    REPEAT          reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    FOR             reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    IFELSE          reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    WORD            reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    $end            reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    ]               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    END             reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    TO              reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    (               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    FLOAT           reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    INTEGER         reduce using rule 29 (expr -> WORD ( expr_list ) .)
+    :               reduce using rule 29 (expr -> WORD ( expr_list ) .)
+
+
+state 75
+
+    (21) instr -> IFELSE condition [ instr_list ] . [ instr_list ]
+
+    [               shift and go to state 81
+
+
+state 76
+
+    (18) instr -> REPEAT expr [ instr_list ] .
+
+    ]               reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    MAKE            reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    REPEAT          reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    FOR             reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    IFELSE          reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    WORD            reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    END             reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    TO              reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+    $end            reduce using rule 18 (instr -> REPEAT expr [ instr_list ] .)
+
+
+state 77
+
+    (19) instr -> FOR [ WORD expr expr . expr ] [ instr_list ]
+    (20) instr -> FOR [ WORD expr expr . ] [ instr_list ]
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+    (26) expr -> . const
+    (27) expr -> . name
+    (28) expr -> . ref
+    (29) expr -> . WORD ( expr_list )
+    (30) expr -> . expr + expr
+    (31) expr -> . expr - expr
+    (32) expr -> . expr * expr
+    (33) expr -> . expr / expr
+    (34) expr -> . ( expr )
+    (43) const -> . FLOAT
+    (44) const -> . INTEGER
+    (42) name -> . WORD
+    (16) ref -> . : WORD
+
+    ]               shift and go to state 83
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+    WORD            shift and go to state 21
+    (               shift and go to state 17
+    FLOAT           shift and go to state 15
+    INTEGER         shift and go to state 18
+    :               shift and go to state 19
+
+    const                          shift and go to state 16
+    name                           shift and go to state 23
+    expr                           shift and go to state 82
+    ref                            shift and go to state 20
+
+state 78
+
+    (8) func -> TO WORD ( params ) extended_instr_list . END
+    (14) extended_instr_list -> extended_instr_list . instr
+    (15) extended_instr_list -> extended_instr_list . func
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+    (8) func -> . TO WORD ( params ) extended_instr_list END
+
+    END             shift and go to state 86
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+    TO              shift and go to state 4
+
+    instr                          shift and go to state 84
+    func                           shift and go to state 85
+
+state 79
+
+    (12) extended_instr_list -> instr .
+
+    END             reduce using rule 12 (extended_instr_list -> instr .)
+    MAKE            reduce using rule 12 (extended_instr_list -> instr .)
+    REPEAT          reduce using rule 12 (extended_instr_list -> instr .)
+    FOR             reduce using rule 12 (extended_instr_list -> instr .)
+    IFELSE          reduce using rule 12 (extended_instr_list -> instr .)
+    WORD            reduce using rule 12 (extended_instr_list -> instr .)
+    TO              reduce using rule 12 (extended_instr_list -> instr .)
+
+
+state 80
+
+    (13) extended_instr_list -> func .
+
+    END             reduce using rule 13 (extended_instr_list -> func .)
+    MAKE            reduce using rule 13 (extended_instr_list -> func .)
+    REPEAT          reduce using rule 13 (extended_instr_list -> func .)
+    FOR             reduce using rule 13 (extended_instr_list -> func .)
+    IFELSE          reduce using rule 13 (extended_instr_list -> func .)
+    WORD            reduce using rule 13 (extended_instr_list -> func .)
+    TO              reduce using rule 13 (extended_instr_list -> func .)
+
+
+state 81
+
+    (21) instr -> IFELSE condition [ instr_list ] [ . instr_list ]
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 87
+
+state 82
+
+    (19) instr -> FOR [ WORD expr expr expr . ] [ instr_list ]
+    (30) expr -> expr . + expr
+    (31) expr -> expr . - expr
+    (32) expr -> expr . * expr
+    (33) expr -> expr . / expr
+
+    ]               shift and go to state 88
+    +               shift and go to state 39
+    -               shift and go to state 41
+    *               shift and go to state 40
+    /               shift and go to state 42
+
+
+state 83
+
+    (20) instr -> FOR [ WORD expr expr ] . [ instr_list ]
+
+    [               shift and go to state 89
+
+
+state 84
+
+    (14) extended_instr_list -> extended_instr_list instr .
+
+    END             reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    MAKE            reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    REPEAT          reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    FOR             reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    IFELSE          reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    WORD            reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+    TO              reduce using rule 14 (extended_instr_list -> extended_instr_list instr .)
+
+
+state 85
+
+    (15) extended_instr_list -> extended_instr_list func .
+
+    END             reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    MAKE            reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    REPEAT          reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    FOR             reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    IFELSE          reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    WORD            reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+    TO              reduce using rule 15 (extended_instr_list -> extended_instr_list func .)
+
+
+state 86
+
+    (8) func -> TO WORD ( params ) extended_instr_list END .
+
+    TO              reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    MAKE            reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    REPEAT          reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    FOR             reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    IFELSE          reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    WORD            reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    $end            reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+    END             reduce using rule 8 (func -> TO WORD ( params ) extended_instr_list END .)
+
+
+state 87
+
+    (21) instr -> IFELSE condition [ instr_list ] [ instr_list . ]
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    ]               shift and go to state 90
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 88
+
+    (19) instr -> FOR [ WORD expr expr expr ] . [ instr_list ]
+
+    [               shift and go to state 91
+
+
+state 89
+
+    (20) instr -> FOR [ WORD expr expr ] [ . instr_list ]
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 92
+
+state 90
+
+    (21) instr -> IFELSE condition [ instr_list ] [ instr_list ] .
+
+    ]               reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    MAKE            reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    REPEAT          reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    FOR             reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    IFELSE          reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    WORD            reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    END             reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    TO              reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+    $end            reduce using rule 21 (instr -> IFELSE condition [ instr_list ] [ instr_list ] .)
+
+
+state 91
+
+    (19) instr -> FOR [ WORD expr expr expr ] [ . instr_list ]
+    (6) instr_list -> . instr
+    (7) instr_list -> . instr_list instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 1
+    instr_list                     shift and go to state 93
+
+state 92
+
+    (20) instr -> FOR [ WORD expr expr ] [ instr_list . ]
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    ]               shift and go to state 94
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 93
+
+    (19) instr -> FOR [ WORD expr expr expr ] [ instr_list . ]
+    (7) instr_list -> instr_list . instr
+    (17) instr -> . MAKE quoted expr
+    (18) instr -> . REPEAT expr [ instr_list ]
+    (19) instr -> . FOR [ WORD expr expr expr ] [ instr_list ]
+    (20) instr -> . FOR [ WORD expr expr ] [ instr_list ]
+    (21) instr -> . IFELSE condition [ instr_list ] [ instr_list ]
+    (22) instr -> . WORD ( expr_list )
+
+    ]               shift and go to state 95
+    MAKE            shift and go to state 11
+    REPEAT          shift and go to state 7
+    FOR             shift and go to state 8
+    IFELSE          shift and go to state 6
+    WORD            shift and go to state 3
+
+    instr                          shift and go to state 12
+
+state 94
+
+    (20) instr -> FOR [ WORD expr expr ] [ instr_list ] .
+
+    ]               reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    MAKE            reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    REPEAT          reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    FOR             reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    IFELSE          reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    WORD            reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    END             reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    TO              reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+    $end            reduce using rule 20 (instr -> FOR [ WORD expr expr ] [ instr_list ] .)
+
+
+state 95
+
+    (19) instr -> FOR [ WORD expr expr expr ] [ instr_list ] .
+
+    ]               reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    MAKE            reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    REPEAT          reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    FOR             reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    IFELSE          reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    WORD            reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    END             reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    TO              reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+    $end            reduce using rule 19 (instr -> FOR [ WORD expr expr expr ] [ instr_list ] .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ( in state 21 resolved as shift
+WARNING: shift/reduce conflict for : in state 33 resolved as shift

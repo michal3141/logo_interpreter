@@ -1,0 +1,5 @@
+to inc(:x)
+    make "inc :x+1
+end
+
+repeat 1000 [fd(3 * (randint(0,2) - 1)) rt(90 * randint(0, 4))]

@@ -1,0 +1,10 @@
+; Should fail due to specific reason
+; Namely: function failure is not really returning value
+; although there is make statement in outer function (main program)
+; which does assignment 
+to failure(:x)
+	fd(:x)
+end
+
+make "failure 10
+fd(failure(100)) ; should cause TypeError but draw something

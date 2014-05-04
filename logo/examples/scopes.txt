@@ -1,0 +1,4 @@
+make "x 100
+repeat 10 [make "x repcount()*10 fd(:x) rt(:x)]
+fd(:x)
+

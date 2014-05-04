@@ -1,0 +1,21 @@
+to gen_func(:x)
+	make "y 100
+	to func(:z)
+		fd(:x)
+		rt(:y)
+		fd(:z)
+	end
+	make "gen_func func
+end
+
+to gen_func2(:x)
+	to func2(:y)
+		fd(:x + :y)
+	end
+	make "gen_func2 func2
+end
+
+make "x gen_func(100)
+repeat 20 [x(100)]
+make "y gen_func2(150)
+y(140)

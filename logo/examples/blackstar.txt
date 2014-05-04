@@ -1,0 +1,5 @@
+to inc(:x)
+    make "inc :x+1
+end
+
+repeat 200 [fd(inc(repcount())) rt(inc(inc(repcount())))]

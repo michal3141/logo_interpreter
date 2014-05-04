@@ -1,0 +1,1 @@
+repeat 360 [setpos((sin(2 * repcount())) * 150, (sin(3 * repcount())) * 150)] 

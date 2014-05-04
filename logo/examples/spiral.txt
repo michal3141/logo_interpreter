@@ -1,0 +1,1 @@
+make "x 1 repeat 150 [fd(:x) rt(89) make "x :x + 1]
